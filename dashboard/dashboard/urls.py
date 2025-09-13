@@ -24,6 +24,7 @@ from .forms import CaptchaLoginForm  # newline
 urlpatterns = [
     path("admin/", admin.site.urls), 
     path("captcha/", include("captcha.urls")), # newline
+    path("", include("app01.urls")), #newline 
 
     # login & logout
     path("accounts/login/",auth_views.LoginView.as_view(authentication_form=CaptchaLoginForm, template_name='login.html'), name="login"), # newline

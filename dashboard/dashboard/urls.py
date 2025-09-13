@@ -16,8 +16,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+# new line ->
+from django.contrib.auth import views as auth_views 
+from .forms import CaptchaLoginForm  # newline
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls), 
+    path("captcha/", include("captcha.urls")), # newline
+
+    # login & logout
+    path("accounts/login/",auth_views.LoginView.as_view(authentication_form=CaptchaLoginForm, template_name='login.html'), name="login"), # newline
+    path('accounts/logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'), # newline
 ]
